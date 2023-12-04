@@ -11,7 +11,6 @@ router.get('/', async(req, res) => {
         console.log(error);
         res.status(500).json({success:false, error:'something wrong'});
     }
-
 })
 
 
