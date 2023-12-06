@@ -12,7 +12,7 @@ router.get('/', async(req, res) => {
         res.status(500).json({success:false, error:'something wrong'});
     }
 })
-
+// 
 
 // Get single idea
 router.get('/:id', async(req, res) => {
