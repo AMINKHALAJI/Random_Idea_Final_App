@@ -41,6 +41,7 @@ class IdeaList{
          this._ideas.filter((idea) => idea._id !== ideaId);
         this.getIdeas();
     } catch (error) {
+        console.log(error.message);
         alert('you cannot delete');
     }
  }

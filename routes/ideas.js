@@ -60,21 +60,23 @@ router.put('/:id', async(req, res) => {
         const idea= await Idea.findById(req.params.id);
         if (idea.username===req.body.username) {
             const UpdateIdea = await Idea.findByIdAndUpdate(
-                req.params.id ,
+                req.params.id ,{
+                    $set:
                 {
                     text: req.body.text,
                     tag: req.body.tag,
-                },
+                }
+            },
                 {  
                     new: true
                 }
                 );
                return res.json({success:true, data: UpdateIdea});
-        }
+        }else {
 
         // username doesnot match
         res.status(403).json({success:false, error:'you are not authorized to update'})
-        
+        }
 
     } catch (error) {
         console.log(error);
@@ -89,12 +91,15 @@ router.delete('/:id', async(req, res) => {
     try {
         const idea= await Idea.findById(req.params.id);
         // Match the username
-        if (idea.username===req.body.username) {
+        if (idea.username===req.body.username ) {
             await Idea.findByIdAndDelete(req.params.id);
             return res.json({success:true, data: {}});
-        }
+        
+        } else (
+            res.status(403).json({success:false, error:'you are not authorized to delete'})
+
+        )
         // username doesnot match
-         res.status(403).json({success:false, error:'you are not authorized to delete'})
 
     } catch (error) {
         console.log(error);
