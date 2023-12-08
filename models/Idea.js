@@ -7,7 +7,7 @@ const IdeaSchema=new mongoose.Schema({
     },
     tag:{
         type:String,
-    },
+    },  
     username:{
         type:String,
     },
@@ -16,5 +16,7 @@ const IdeaSchema=new mongoose.Schema({
         default:Date.now
     }
 });
+ 
+
 
 module.exports = mongoose.model('Idea',IdeaSchema); 
