@@ -17,15 +17,16 @@ router.get('/', async(req, res) => {
 // Get single idea
 router.get('/:id', async(req, res) => {
 
-    const idea= await Idea.findById(req.params.id);
-    res.json({success:true, data: idea});
+    
 
     
     try {
-        const idea= await Idea.find
-    } catch (error) {
+        const idea= await Idea.findById(req.params.id);
+        res.json({success:true, data: idea});    
+    }
+     catch (error) {
         console.log(error);
-        return res.status(404).json({success:false, error:'sth not found'})
+        return res.status(500).json({success:false, error:'sth not found'})
 
     }
 
@@ -46,7 +47,7 @@ router.post('/', async(req, res) => {
 
     } catch (error) {
         console.log(error);
-        return res.status(404).json({success:false, error:'sth not found'})
+        return res.status(500).json({success:false, error:'sth not found'})
 
     }
 
@@ -59,7 +60,7 @@ router.put('/:id', async(req, res) => {
 
         const idea= await Idea.findById(req.params.id);
         if (idea.username===req.body.username) {
-            const UpdateIdea = await Idea.findByIdAndUpdate(
+            const updatedIdea = await Idea.findByIdAndUpdate(
                 req.params.id ,{
                     $set:
                 {
@@ -71,7 +72,7 @@ router.put('/:id', async(req, res) => {
                     new: true
                 }
                 );
-               return res.json({success:true, data: UpdateIdea});
+               return res.json({success:true, data: updatedIdea});
         }else {
 
         // username doesnot match
